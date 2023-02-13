@@ -1,9 +1,9 @@
-import { extendBaseTheme } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 import chakraTheme from "@chakra-ui/theme";
 
-const { Button } = chakraTheme.components;
+// const { Button } = chakraTheme.components;
 
-export const theme = extendBaseTheme({
+export const theme = extendTheme({
   colors: {
     brand: {
       100: "#FF3c00",
@@ -14,12 +14,12 @@ export const theme = extendBaseTheme({
   },
   styles: {
     global: () => ({
-      boyd: {
+      body: {
         bg: "gray.200",
       },
     }),
   },
   components: {
-    Button,
+    // Button,
   },
 });
