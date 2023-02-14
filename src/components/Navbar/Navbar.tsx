@@ -1,6 +1,8 @@
 import { Image } from "@chakra-ui/image";
 import { Flex } from "@chakra-ui/layout";
 import React from "react";
+import AuthModal from "../Modal/Auth/AuthModal";
+import RightContent from "./RightContent/RightContent";
 import SearchBar from "./SearchBar";
 
 type Props = {};
@@ -17,6 +19,8 @@ const Navbar = (props: Props) => {
         />
       </Flex>
       <SearchBar />
+      <AuthModal />
+      <RightContent />
     </Flex>
   );
 };

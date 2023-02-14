@@ -9,13 +9,13 @@ const SearchBar = (props: Props) => {
       flexGrow={1}
       // maxWidth={user ? "auto" : "600px"}
       mr={2}
+      ml={2}
       alignItems="center"
     >
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
           color="gray.400"
-          // children={<SearchIcon mb={2} />}
         >
           <SearchIcon mb={2} />
         </InputLeftElement>
