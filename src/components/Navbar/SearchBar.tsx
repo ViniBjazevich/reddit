@@ -1,9 +1,7 @@
 import { Flex, InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
-type Props = {};
-
-const SearchBar = (props: Props) => {
+const SearchBar = () => {
   return (
     <Flex
       flexGrow={1}
@@ -13,10 +11,7 @@ const SearchBar = (props: Props) => {
       alignItems="center"
     >
       <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          color="gray.400"
-        >
+        <InputLeftElement pointerEvents="none" color="gray.400">
           <SearchIcon mb={2} />
         </InputLeftElement>
         <Input

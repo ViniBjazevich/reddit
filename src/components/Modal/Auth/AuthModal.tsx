@@ -1,7 +1,6 @@
+import { useEffect } from "react";
 import { selectAuthModal } from "@/redux/selectors";
-import { toggleAuthModal } from "@/redux/slices/modal";
-import { Button } from "@chakra-ui/button";
-import { useDisclosure } from "@chakra-ui/hooks";
+import { closeAuthModal } from "@/redux/slices/modal";
 import {
   Modal,
   ModalOverlay,
@@ -9,40 +8,63 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
 } from "@chakra-ui/modal";
+import { Flex } from "@chakra-ui/react";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import AuthInputs from "./AuthInputs";
+import OAuthButton from "./OAuthButton";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/firebase/initializeUI";
+import ResetPassword from "./ResetPassword";
 
-type Props = {};
-
-const AuthModal = (props: Props) => {
-  // const { isOpen, onOpen, onClose } = useDisclosure();
+const AuthModal = () => {
+  const [user, loading, error] = useAuthState(auth);
   const authModal = useSelector(selectAuthModal);
   const dispatch = useDispatch();
 
-  const handleModal = () => {
-    console.log("Hello");
-    dispatch(toggleAuthModal());
+  const handleCloseModal = () => {
+    dispatch(closeAuthModal());
   };
+
+  useEffect(() => {
+    if (user) handleCloseModal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
   return (
     <>
-      <Button onClick={handleModal}>Open Modal</Button>
-
-      <Modal isOpen={authModal.open} onClose={handleModal}>
+      <Modal isOpen={authModal.open} onClose={handleCloseModal}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader textAlign={"center"}>
+            {authModal.view === "login" && "Login"}
+            {authModal.view === "signup" && "Sign Up"}
+            {authModal.view === "reset password" && "Reset Password"}
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>This is the modal body</ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={handleModal}>
-              Close
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
-          </ModalFooter>
+          <ModalBody
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            pb={6}
+          >
+            <Flex
+              flexDirection={"column"}
+              align={"center"}
+              justify={"center"}
+              width={"70%"}
+            >
+              {authModal.view === "reset password" ? (
+                <ResetPassword />
+              ) : (
+                <OAuthButton />
+              )}
+              <AuthInputs />
+            </Flex>
+          </ModalBody>
         </ModalContent>
       </Modal>
     </>

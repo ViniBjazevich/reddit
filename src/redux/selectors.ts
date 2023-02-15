@@ -1,5 +1,5 @@
 import { RootState } from "./store";
 
-// selectors will go here
+// Modal Selectors
 export const selectModal = (state: RootState) => state.modal;
 export const selectAuthModal = (state: RootState) => state.modal.authModal;

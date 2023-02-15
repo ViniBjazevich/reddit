@@ -39,4 +39,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Technologies
 
-Next.js, Typescript, Chakra-UI, Firebase
+Next.js, Typescript, Chakra-UI, Firebase, Redux
+
+## Helpful docs
+
+- Firebase Hooks: https://github.com/CSFrequency/react-firebase-hooks
