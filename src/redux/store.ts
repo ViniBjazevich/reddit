@@ -5,7 +5,7 @@ import userReducer from "./slices/auth";
 export const store = configureStore({
   reducer: {
     modal: modalReducer,
-    user: userReducer,
+    auth: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

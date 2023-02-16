@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { selectAuthModal } from "@/redux/selectors";
+import { selectAuthModal, selectUser } from "@/redux/selectors";
 import { closeAuthModal } from "@/redux/slices/modal";
 import {
   Modal,
@@ -11,16 +11,13 @@ import {
 } from "@chakra-ui/modal";
 import { Flex } from "@chakra-ui/react";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AuthInputs from "./AuthInputs";
 import OAuthButton from "./OAuthButton";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/firebase/initializeUI";
 import ResetPassword from "./ResetPassword";
 
 const AuthModal = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const user = useSelector(selectUser);
   const authModal = useSelector(selectAuthModal);
   const dispatch = useDispatch();
 

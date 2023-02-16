@@ -3,13 +3,10 @@ import AuthButtons from "./AuthButtons";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/initializeUI";
 import { Button, Flex } from "@chakra-ui/react";
-import { User as FirebaseUser } from "firebase/auth";
+import { selectUser } from "@/redux/selectors";
 
-type Props = {
-  user: FirebaseUser | undefined | null;
-};
-
-const RightContent = ({ user }: Props) => {
+const RightContent = () => {
+  const user = useSelector(selectUser);
   const [signOut, loading, error] = useSignOut(auth);
 
   return (
