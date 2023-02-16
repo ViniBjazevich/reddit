@@ -1,16 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modalReducer from "./slices/modal";
-import userReducer from "./slices/user";
+import userReducer from "./slices/auth";
 
 export const store = configureStore({
   reducer: {
     modal: modalReducer,
     user: userReducer,
   },
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({
-  //     serializableCheck: false,
-  //   }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

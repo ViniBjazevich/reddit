@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, ReactNode } from "react";
 import Navbar from "../Navbar/Navbar";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/initializeUI";
 import { useDispatch } from "react-redux";
-import { updateUser } from "@/redux/slices/user";
+import { updateAuth } from "@/redux/slices/auth";
 
 // This file displays all of the content that will always exists on the page (Navbar) and renders the children below
 
@@ -14,9 +15,14 @@ const Layout = ({ children }: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateUser(user));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+    let errorMessage: string | null = null;
+
+    if (error) {
+      errorMessage = error.message;
+    }
+
+    dispatch(updateAuth({ user, loading, errorMessage }));
+  }, [user, loading, error]);
 
   return (
     <>
