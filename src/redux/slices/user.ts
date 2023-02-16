@@ -2,25 +2,26 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { User as FirebaseUser } from "firebase/auth";
 
+type User = FirebaseUser | null | undefined;
+
 export interface UserState {
-  info: any;
+  info: User;
 }
 
 const initialState: UserState = {
-  info: {},
+  info: null,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    updateUser: (state, action: PayloadAction<any>) => {
-      state.info = { ...action.payload };
+    updateUser: (state, action: PayloadAction<User>) => {
+      state.info = action.payload;
     },
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { updateUser } = userSlice.actions;
 
 export default userSlice.reducer;
