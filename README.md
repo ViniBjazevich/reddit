@@ -44,3 +44,6 @@ Next.js, Typescript, Chakra-UI, Firebase, Redux
 ## Helpful docs
 
 - Firebase Hooks: https://github.com/CSFrequency/react-firebase-hooks
+- Chakra UI (v2 was having issues with Next 13 so I had to use v1): https://v1.chakra-ui.com/
+- Redux Toolkit docs: https://redux-toolkit.js.org/tutorials/quick-start
+
