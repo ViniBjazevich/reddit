@@ -1,5 +1,5 @@
 import React from "react";
-import { openAuthModal } from "@/redux/slices/modal";
+import { openAuthenticationModal } from "@/redux/slices/modal";
 import { Flex, Icon, MenuDivider, MenuItem } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { MdOutlineLogin } from "react-icons/md";
@@ -47,7 +47,7 @@ const MenuList = () => {
         fontSize="10pt"
         fontWeight={700}
         _hover={{ bg: "blue.500", color: "white" }}
-        onClick={() => dispatch(openAuthModal("login"))}
+        onClick={() => dispatch(openAuthenticationModal("login"))}
       >
         <Flex alignItems="center">
           <Icon fontSize={20} mr={2} as={MdOutlineLogin} />

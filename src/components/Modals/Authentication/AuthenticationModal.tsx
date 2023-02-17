@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { selectAuthModal, selectUser } from "@/redux/selectors";
-import { closeAuthModal } from "@/redux/slices/modal";
+import { selectAuthenticationModal, selectUser } from "@/redux/selectors";
+import { closeAuthenticationModal } from "@/redux/slices/modal";
 import {
   Modal,
   ModalOverlay,
@@ -12,17 +12,18 @@ import {
 import { Flex } from "@chakra-ui/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AuthInputs from "./AuthInputs";
 import OAuthButton from "./OAuthButton";
 import ResetPassword from "./ResetPassword";
+import Login from "./Login";
+import SignUp from "./SignUp";
 
-const AuthModal = () => {
+const AuthenticationModal = () => {
   const user = useSelector(selectUser);
-  const authModal = useSelector(selectAuthModal);
+  const { open, view } = useSelector(selectAuthenticationModal);
   const dispatch = useDispatch();
 
   const handleCloseModal = () => {
-    dispatch(closeAuthModal());
+    dispatch(closeAuthenticationModal());
   };
 
   useEffect(() => {
@@ -32,13 +33,13 @@ const AuthModal = () => {
 
   return (
     <>
-      <Modal isOpen={authModal.open} onClose={handleCloseModal}>
+      <Modal isOpen={open} onClose={handleCloseModal}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign={"center"}>
-            {authModal.view === "login" && "Login"}
-            {authModal.view === "signup" && "Sign Up"}
-            {authModal.view === "reset password" && "Reset Password"}
+            {view === "login" && "Login"}
+            {view === "signup" && "Sign Up"}
+            {view === "reset password" && "Reset Password"}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody
@@ -54,12 +55,11 @@ const AuthModal = () => {
               justify={"center"}
               width={"70%"}
             >
-              {authModal.view === "reset password" ? (
-                <ResetPassword />
-              ) : (
-                <OAuthButton />
-              )}
-              <AuthInputs />
+              {view === "reset password" ? <ResetPassword /> : <OAuthButton />}
+              <Flex direction={"column"} align={"center"} width={"100%"} mt={4}>
+                {view === "login" && <Login />}
+                {view === "signup" && <SignUp />}
+              </Flex>
             </Flex>
           </ModalBody>
         </ModalContent>
@@ -68,4 +68,4 @@ const AuthModal = () => {
   );
 };
 
-export default AuthModal;
+export default AuthenticationModal;

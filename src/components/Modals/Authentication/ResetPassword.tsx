@@ -1,4 +1,4 @@
-import { openAuthModal } from "@/redux/slices/modal";
+import { openAuthenticationModal } from "@/redux/slices/modal";
 import {
   Flex,
   Text,
@@ -34,8 +34,8 @@ const ResetPassword = (props: Props) => {
     setEmail(event.target.value);
   };
 
-  const navigateToSignUpPage = () => dispatch(openAuthModal("signup"));
-  const navigateToLoginPage = () => dispatch(openAuthModal("login"));
+  const navigateToSignUpPage = () => dispatch(openAuthenticationModal("signup"));
+  const navigateToLoginPage = () => dispatch(openAuthenticationModal("login"));
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { openAuthModal } from "@/redux/slices/modal";
+import { openAuthenticationModal } from "@/redux/slices/modal";
 import { Button } from "@chakra-ui/button";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ const AuthButtons = () => {
         height="28px"
         display={{ base: "none", sm: "flex" }}
         width={{ base: "70px", md: "110px" }}
-        onClick={() => dispatch(openAuthModal("login"))}
+        onClick={() => dispatch(openAuthenticationModal("login"))}
       >
         Log In
       </Button>
@@ -23,7 +23,7 @@ const AuthButtons = () => {
         height="28px"
         display={{ base: "none", sm: "flex" }}
         width={{ base: "70px", md: "110px" }}
-        onClick={() => dispatch(openAuthModal("signup"))}
+        onClick={() => dispatch(openAuthenticationModal("signup"))}
       >
         Sign Up
       </Button>

@@ -5,8 +5,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/initializeUI";
 import { useDispatch } from "react-redux";
 import { updateAuth } from "@/redux/slices/auth";
-import AuthModal from "../Modal/Auth/AuthModal";
-import CommunityModal from "../Modal/Community/CommunityModal";
+import AuthenticationModal from "../Modals/Authentication/AuthenticationModal";
+import CommunityModal from "../Modals/Community/CommunityModal";
 
 // This file displays all of the content that will always exists on the page (Navbar) and renders the children below
 
@@ -29,7 +29,7 @@ const Layout = ({ children }: Props) => {
   return (
     <>
       <Navbar />
-      <AuthModal />
+      <AuthenticationModal />
       <CommunityModal />
       <main>{children}</main>
     </>

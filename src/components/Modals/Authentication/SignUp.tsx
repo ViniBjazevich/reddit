@@ -8,7 +8,7 @@ import {
   Input,
   Button,
 } from "@chakra-ui/react";
-import { openAuthModal } from "@/redux/slices/modal";
+import { openAuthenticationModal } from "@/redux/slices/modal";
 import { useDispatch } from "react-redux";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/initializeUI";
@@ -47,7 +47,7 @@ const SignUp = () => {
     }));
   };
 
-  const navigateToLoginPage = () => dispatch(openAuthModal("login"));
+  const navigateToLoginPage = () => dispatch(openAuthenticationModal("login"));
 
   return (
     <form onSubmit={handleSubmit}>

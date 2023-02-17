@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 type view = "login" | "signup" | "reset password";
 
-interface AuthModal {
+interface AuthenticationModal {
   open: boolean;
   view: view;
 }
@@ -13,12 +13,12 @@ interface CommunityModal {
 }
 
 export interface ModalState {
-  authModal: AuthModal;
+  authenticationModal: AuthenticationModal;
   communityModal: CommunityModal;
 }
 
 const initialState: ModalState = {
-  authModal: {
+  authenticationModal: {
     open: false,
     view: "login",
   },
@@ -31,11 +31,11 @@ export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    closeAuthModal: (state) => {
-      state.authModal.open = false;
+    closeAuthenticationModal: (state) => {
+      state.authenticationModal.open = false;
     },
-    openAuthModal: (state, action: PayloadAction<view>) => {
-      state.authModal = {
+    openAuthenticationModal: (state, action: PayloadAction<view>) => {
+      state.authenticationModal = {
         open: true,
         view: action.payload,
       };
@@ -51,8 +51,8 @@ export const modalSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-  closeAuthModal,
-  openAuthModal,
+  closeAuthenticationModal,
+  openAuthenticationModal,
   closeCommunityModal,
   openCommunityModal,
 } = modalSlice.actions;

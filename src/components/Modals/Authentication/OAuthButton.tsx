@@ -13,7 +13,6 @@ import { FIREBASE_ERRORS, ErrorKeys } from "@/firebase/errors";
 
 const OAuthButton = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-  console.log(user)
 
   const handleGoogleLogin = () => {
     signInWithGoogle();
