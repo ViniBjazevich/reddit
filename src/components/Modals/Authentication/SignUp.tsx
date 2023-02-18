@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Alert,
   AlertIcon,
@@ -11,8 +11,10 @@ import {
 import { openAuthenticationModal } from "@/redux/slices/modal";
 import { useDispatch } from "react-redux";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "@/firebase/initializeUI";
+import { auth, firestore } from "@/firebase/initializeUI";
 import { ErrorKeys, FIREBASE_ERRORS } from "@/firebase/errors";
+import { addDoc, collection } from "firebase/firestore";
+import { User } from "firebase/auth";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const SignUp = () => {
     password: "",
     confirmation: "",
   });
-  const [createUserWithEmailAndPassword, user, loading, userError] =
+  const [createUserWithEmailAndPassword, userCredentials, loading, userError] =
     useCreateUserWithEmailAndPassword(auth);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -39,6 +41,18 @@ const SignUp = () => {
     }
     createUserWithEmailAndPassword(email, password);
   };
+
+  const addUserDocument = async () => {
+    if (userCredentials) {
+      const user: User = JSON.parse(JSON.stringify(userCredentials.user));
+      await addDoc(collection(firestore, "users"), user);
+    }
+  };
+
+  useEffect(() => {
+    addUserDocument();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userCredentials]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSignUpForm((prev) => ({
@@ -85,7 +99,8 @@ const SignUp = () => {
         <Alert status="error">
           <AlertIcon />
           <AlertTitle>
-            {FIREBASE_ERRORS[userError.message as ErrorKeys]}
+            {FIREBASE_ERRORS[userError.message as ErrorKeys] ??
+              userError.message}
           </AlertTitle>
         </Alert>
       )}
